@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sine</title>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+</head>
+<body>
+    <div id="app">
+        <router-link to="view1"><span slot="content">view1</span></router-link>
+        <router-link to="view2"><span slot="content">view2</span></router-link>
+        <router-link to="view3"><span slot="content">view3</span></router-link>
+        <router-view></router-view>
+    </div>
+
+    <script src="./lib/automate.js"></script>
+    <script src="../dist/automate-router.js"></script>
+
+    <script>
+        var routeConfig = [
+            {
+                path: 'view1',
+                component: 'view1'
+            },
+            {
+                path: 'view2',
+                component: 'view2'
+            },
+            {
+                path: 'view3',
+                component: 'view3'
+            }
+        ];
+
+        automate.namespace('sample').component('view1', {
+
+        }, {
+            template: 'this is view1'
+        });
+
+        automate.namespace('sample').component('view2', {
+
+        }, {
+            template: 'this is view2'
+        });
+
+        automate.namespace('sample').component('view3', {
+
+        }, {
+            template: 'this is view3'
+        });
+
+        automate.namespace('sample').render('#app', {
+            construct: function () {
+                this.$router.config(routeConfig, {
+                    namespace: 'sample'
+                });
+            }
+        }, {
+            inject: {
+                $router: 'routerService'
+            }
+        });
+
+    </script>
+</body>
+</html>
